@@ -1,0 +1,4 @@
+{
+  "src/**/*.{js,jsx,ts,tsx,vue}": "yarn lint",
+  "src/**/*.{vue,css,less,scss}": "yarn stylelint"
+}
