@@ -1,2 +1,5 @@
-/node_modules/
-/dist/
+# 忽略文件或文件夹
+dist/
+build/
+.husky/
+config/

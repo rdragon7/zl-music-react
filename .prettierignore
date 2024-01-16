@@ -1,6 +1,7 @@
-/dist/
-/node_modules/
-/public/
+/public/**
+/.husky/**
+/node_modules/**
+/dist/*
 
 **/*.svg
 **/*.sh
