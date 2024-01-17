@@ -1,4 +1,4 @@
 {
-  "src/**/*.{js,ts,jsx,tsx}": "yarn lint:fix",
-  "src/**/*.{css,less,scss}": "yarn stylelint:fix"
+  "src/**/*.{js,ts,jsx,tsx,vue}": "yarn lint:fix",
+  "src/**/*.{css,less,vue}": "yarn stylelint:fix"
 }
