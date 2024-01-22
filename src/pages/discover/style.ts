@@ -18,8 +18,9 @@ export const DiscoverWrapper = styled.div`
           padding: 0 13px;
           margin: 7px 17px 0;
           color: #fff;
+
           &:hover,
-          &:active {
+          &.active {
             text-decoration: none;
             background-color: #9b0909;
             border-radius: 20px;

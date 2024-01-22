@@ -96,26 +96,26 @@ export const footerImages = [
 export const discoverMenu = [
   {
     title: '推荐',
-    link: '/recommend'
+    link: '/'
   },
   {
     title: '排行榜',
-    link: '/ranking'
+    link: '/discover/ranking'
   },
   {
     title: '歌单',
-    link: '/song'
+    link: '/discover/songs'
   },
   {
     title: '主播电台',
-    link: '/radio'
+    link: '/discover/radio'
   },
   {
     title: '歌手',
-    link: '/artist'
+    link: '/discover/artist'
   },
   {
     title: '新碟上架',
-    link: '/album'
+    link: '/discover/album'
   }
 ]
