@@ -1,11 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import counterSlice from './slice/counterSlice'
+import recommendSlice from './slice/recommendSlice'
 
 const store = configureStore({
   reducer: {
-    count: counterSlice
-  }
+    recommend: recommendSlice
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      // 关闭redux序列化检测
+      serializableCheck: false
+    })
 })
 
 export default store
