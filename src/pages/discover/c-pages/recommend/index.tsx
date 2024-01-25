@@ -1,29 +1,13 @@
-import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
-import { getTopBanner } from '@/store/slice/recommendSlice'
-import { useEffect } from 'react'
+import { memo } from 'react'
 
-const ZLRecommend = () => {
-  // state & props
-  const { topBannerList } = useAppSelector(
-    (state: RootState) => state.recommend
-  )
+import ZLTopBanner from './c-cpns/top-banner'
 
-  // redux hooks
-  const dispatch = useAppDispatch()
-  // other hooks
-  useEffect(() => {
-    dispatch(getTopBanner())
-  }, [])
+import { RecommendWrapper } from './style'
 
-  // handles
-
+export default memo(function ZLRecommend() {
   return (
-    <div>
-      {topBannerList.map((item: any) => {
-        return <img key={item.targetId} src={item.imageUrl} />
-      })}
-    </div>
+    <RecommendWrapper>
+      <ZLTopBanner />
+    </RecommendWrapper>
   )
-}
-
-export default ZLRecommend
+})

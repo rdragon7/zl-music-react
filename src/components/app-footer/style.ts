@@ -4,7 +4,7 @@ import footerImg from '@/assets/images/sprite_footer_03.png'
 import police from '@/assets/images/police.png'
 
 export const AppFooterWrapper = styled.div`
-  border-top: 1px solid #d3d3d3;
+  /* border-top: 1px solid #d3d3d3; */
   .footer-content {
     .top {
       display: flex;

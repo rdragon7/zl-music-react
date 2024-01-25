@@ -18,8 +18,8 @@ const ZLDiscover = memo(() => {
             )
           })}
         </div>
-        <Outlet />
       </div>
+      <Outlet />
     </DiscoverWrapper>
   )
 })
