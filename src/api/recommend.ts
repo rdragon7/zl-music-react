@@ -6,3 +6,13 @@ export function getTopBannerList() {
     url: '/banner'
   })
 }
+
+// 获取热门推荐列表数据
+export function getHotRecommendList(limit: number) {
+  return zlRequest.get({
+    url: '/personalized',
+    params: {
+      limit
+    }
+  })
+}

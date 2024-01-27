@@ -55,7 +55,7 @@ const ZLTopBanner = memo(() => {
           </Carousel>
         </div>
         <div className="right">
-          <a href="/toto">下载</a>
+          <a href="/todo">下载</a>
         </div>
         <div className="control">
           <button
