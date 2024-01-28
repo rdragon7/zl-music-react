@@ -13,14 +13,15 @@ const ZLThemeHeaderRCM: React.FC<IProps> = memo(props => {
       <div className="theme-header-left">
         <h3 className="title">{title}</h3>
         <div className="keyword-list">
-          {keyword.map((item: string) => {
-            return (
-              <div className="item" key={item}>
-                <a href="/todo">{item}</a>
-                <span className="divider">|</span>
-              </div>
-            )
-          })}
+          {keyword &&
+            keyword.map((item: string) => {
+              return (
+                <div className="item" key={item}>
+                  <a href="/todo">{item}</a>
+                  <span className="divider">|</span>
+                </div>
+              )
+            })}
         </div>
       </div>
       <div className="theme-header-right">

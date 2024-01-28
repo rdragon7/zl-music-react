@@ -16,3 +16,10 @@ export function getHotRecommendList(limit: number) {
     }
   })
 }
+
+// 获取新碟上架列表数据
+export function getNewAlbumList() {
+  return zlRequest.get({
+    url: '/album/newest'
+  })
+}

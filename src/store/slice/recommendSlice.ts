@@ -1,15 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getHotRecommendList, getTopBannerList } from '@/api/recommend'
+import {
+  getNewAlbumList,
+  getHotRecommendList,
+  getTopBannerList
+} from '@/api/recommend'
 
 export interface IState {
   topBannerList: []
   hotRecommendList: []
+  newAlbumList: []
 }
 
 const initialState: IState = {
   topBannerList: [],
-  hotRecommendList: []
+  hotRecommendList: [],
+  newAlbumList: []
 }
 
 export const recommendSlice = createSlice({
@@ -23,6 +29,9 @@ export const recommendSlice = createSlice({
       })
       .addCase(getHotRecommend.fulfilled, (state, action) => {
         state.hotRecommendList = action.payload.data.result
+      })
+      .addCase(getNewAlbum.fulfilled, (state, action) => {
+        state.newAlbumList = action.payload.data.albums
       })
   }
 })
@@ -44,5 +53,11 @@ export const getHotRecommend = createAsyncThunk(
     return res
   }
 )
+
+// 获取新碟上架列表数据
+export const getNewAlbum = createAsyncThunk('recommend/newAlbum', async () => {
+  const res = await getNewAlbumList()
+  return res
+})
 
 export default recommendSlice.reducer
