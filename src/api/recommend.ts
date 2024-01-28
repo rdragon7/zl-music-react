@@ -23,3 +23,13 @@ export function getNewAlbumList() {
     url: '/album/newest'
   })
 }
+
+// 根据榜单id获取对应榜单歌曲
+export function getPlayList(id: number) {
+  return zlRequest.get({
+    url: '/playlist/detail',
+    params: {
+      id
+    }
+  })
+}

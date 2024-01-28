@@ -16,7 +16,7 @@ const ZLSongCover: React.FC<IProps> = memo(props => {
           src={getSizeImage(info.picUrl || info.coverImageUrl, 140)}
           alt=""
         />
-        <div className="cover sprite_cover">
+        <a href="/todo" className="cover sprite_cover">
           <div className="info sprite_cover">
             <span>
               <i className="sprite_icon erji"></i>
@@ -24,7 +24,7 @@ const ZLSongCover: React.FC<IProps> = memo(props => {
             </span>
             <i className="sprite_icon play"></i>
           </div>
-        </div>
+        </a>
       </div>
       <div className="cover-bottom">
         <a href="/todo">{info.name}</a>
