@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ZLTopRankingWrapper = styled.div`
+export const TopRankingWrapper = styled.div`
   flex: 1;
   /* 头部区域 */
   .ranking-header {

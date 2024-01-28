@@ -84,6 +84,7 @@ export const getUpRanking = createAsyncThunk(
     return res
   }
 )
+
 // 获取排行榜-原创榜数据
 export const getNewRanking = createAsyncThunk(
   'recommend/newRanking',
@@ -92,6 +93,7 @@ export const getNewRanking = createAsyncThunk(
     return res
   }
 )
+
 // 获取排行榜-飙升榜数据
 export const getOriginRanking = createAsyncThunk(
   'recommend/originRanking',

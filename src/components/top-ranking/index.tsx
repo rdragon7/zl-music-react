@@ -3,14 +3,14 @@ import React, { memo } from 'react'
 import { getSizeImage } from '@/utils/format-data'
 import { IProps } from './typings'
 
-import { ZLTopRankingWrapper } from './style'
+import { TopRankingWrapper } from './style'
 
 const ZLTopRanking: React.FC<IProps> = memo(props => {
   // state & props
   const { info } = props
 
   return (
-    <ZLTopRankingWrapper>
+    <TopRankingWrapper>
       <div className="ranking-header">
         <div className="image">
           <img src={getSizeImage(info.coverImgUrl, 80)} alt="" />
@@ -49,7 +49,7 @@ const ZLTopRanking: React.FC<IProps> = memo(props => {
       <div className="ranking-footer">
         <a href="/todo">查看全部 &gt;</a>
       </div>
-    </ZLTopRankingWrapper>
+    </TopRankingWrapper>
   )
 })
 

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import downloadImage from '@/assets/images/download.png'
 import spriteImg from '@/assets/images/banner_sprite.png'
 
