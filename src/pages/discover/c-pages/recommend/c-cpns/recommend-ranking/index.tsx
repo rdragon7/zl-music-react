@@ -10,6 +10,7 @@ import {
 } from '@/store/slice/recommendSlice'
 
 import { RecommendRankingWrapper } from './style'
+
 const ZLRecommendRanking = memo(() => {
   // state & props
 

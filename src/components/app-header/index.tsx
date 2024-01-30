@@ -1,9 +1,9 @@
 import { memo } from 'react'
-
-import { headerLinks } from '@/common/local-data'
 import { NavLink } from 'react-router-dom'
+
 import { Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
+import { headerLinks } from '@/common/local-data'
 
 import { HeaderWrapper } from './style'
 

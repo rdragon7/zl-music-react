@@ -1,10 +1,10 @@
 import { Fragment, memo, useEffect } from 'react'
 
+import { HOT_RECOMMEND_LIMIT } from '@/common/constants'
 import ZLThemeHeaderRCM from '@/components/theme-header-rcm'
 import ZLSongCover from '@/components/song-cover'
 import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
 import { getHotRecommend } from '@/store/slice/recommendSlice'
-import { HOT_RECOMMEND_LIMIT } from '@/common/constants'
 
 import { HotRecommendWrapper } from './style'
 
