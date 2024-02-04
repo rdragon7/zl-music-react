@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import recommendSlice from './slice/recommendSlice'
+import playerSlice from './slice/playerSlice'
 
 const store = configureStore({
   reducer: {
-    recommend: recommendSlice
+    recommend: recommendSlice,
+    player: playerSlice
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
