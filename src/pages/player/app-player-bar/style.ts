@@ -25,7 +25,7 @@ export const AppPlayerBarWrapper = styled.div`
   }
 `
 // 左边播放控制区域
-export const Control = styled.div`
+export const Control = styled.div<{ $isPlay: boolean }>`
   display: flex;
   align-items: center;
   .prev,
@@ -49,7 +49,7 @@ export const Control = styled.div`
     width: 36px;
     height: 36px;
     margin: 0 8px;
-    background-position: 0 -204px;
+    background-position: 0 ${props => (props.$isPlay ? '-165px' : '-204px')};
   }
 `
 
@@ -127,7 +127,7 @@ export const PlayInfo = styled.div`
   }
 `
 // 右边按钮区域
-export const Operator = styled.div`
+export const Operator = styled.div<{ $sequence: number }>`
   display: flex;
   .btn {
     width: 25px;
@@ -166,16 +166,34 @@ export const Operator = styled.div`
       }
     }
     .loop {
-      background-position: -66px -248px;
+      background-position: ${props => {
+        switch (props.$sequence) {
+          case 1:
+            return '-66px -248px'
+          case 2:
+            return '-66px -344px'
+          default:
+            return '-3px -344px'
+        }
+      }};
       &:hover {
-        cursor: pointer;
-        background-position: -93px -248px;
+        background-position: ${props => {
+          switch (props.$sequence) {
+            case 1:
+              return '-93px -248px'
+            case 2:
+              return '-93px -344px'
+            default:
+              return '-33px -344px'
+          }
+        }};
       }
     }
     .playlist {
       width: 59px;
       color: #666;
       padding-left: 21px;
+      line-height: 25px;
       background-position: -42px -68px;
       &:hover {
         cursor: pointer;

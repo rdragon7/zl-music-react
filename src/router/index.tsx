@@ -9,6 +9,7 @@ const ZLSongs = lazy(() => import('@/pages/discover/c-pages/songs'))
 const ZLRadio = lazy(() => import('@/pages/discover/c-pages/radio'))
 const ZLArtist = lazy(() => import('@/pages/discover/c-pages/artist'))
 const ZLAlbum = lazy(() => import('@/pages/discover/c-pages/album'))
+const ZLPlayer = lazy(() => import('@/pages/player'))
 const ZLMine = lazy(() => import('@/pages/mine'))
 const ZLFriend = lazy(() => import('@/pages/friend'))
 
@@ -48,6 +49,10 @@ export const routes: any = [
           {
             path: '/discover/album',
             element: lazyLoad(<ZLAlbum />)
+          },
+          {
+            path: '/discover/player',
+            element: lazyLoad(<ZLPlayer />)
           }
         ]
       },

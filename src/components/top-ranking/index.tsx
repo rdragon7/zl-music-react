@@ -2,12 +2,24 @@ import React, { memo } from 'react'
 
 import { getSizeImage } from '@/utils/format-data'
 import { IProps } from './typings'
+import { useAppDispatch } from '@/store/hook'
+import { getSongDetailList } from '@/store/slice/playerSlice'
 
 import { TopRankingWrapper } from './style'
 
 const ZLTopRanking: React.FC<IProps> = memo(props => {
   // state & props
   const { info } = props
+
+  // redux hooks
+
+  // other hooks
+  const dispatch = useAppDispatch()
+
+  // actions
+  const handleClick = (item: any) => {
+    dispatch(getSongDetailList(item.id))
+  }
 
   return (
     <TopRankingWrapper>
@@ -37,7 +49,10 @@ const ZLTopRanking: React.FC<IProps> = memo(props => {
                     {item.name}
                   </a>
                   <div className="operate">
-                    <button className="btn sprite_02 play"></button>
+                    <button
+                      className="btn sprite_02 play"
+                      onClick={() => handleClick(item)}
+                    ></button>
                     <button className="btn sprite_icon2 add"></button>
                     <button className="btn sprite_02 favor"></button>
                   </div>

@@ -1,8 +1,13 @@
 import { memo, useEffect, useRef, useState } from 'react'
 
+import { NavLink } from 'react-router-dom'
 import { Slider } from 'antd'
 import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
-import { getSongDetailList } from '@/store/slice/playerSlice'
+import {
+  changeSequence,
+  getSongDetailList,
+  changeCurrentSongAnIndex
+} from '@/store/slice/playerSlice'
 import {
   formatMinuteSecond,
   getPlayUrl,
@@ -26,7 +31,9 @@ const ZLAppPlayerBar = memo(() => {
 
   // redux hooks
   const dispatch = useAppDispatch()
-  const { currentSong } = useAppSelector((state: RootState) => state.player)
+  const { currentSong, sequence, playList } = useAppSelector(
+    (state: RootState) => state.player
+  )
 
   // other hooks
   const playRef = useRef<any>()
@@ -36,7 +43,7 @@ const ZLAppPlayerBar = memo(() => {
 
   // 页面一挂载就将当前歌曲的总时长存储起来
   useEffect(() => {
-    playRef.current.src = getPlayUrl(currentSong.id)
+    playRef.current.src = getPlayUrl(currentSong && currentSong.id)
     playRef.current
       .play()
       .then(() => {
@@ -45,11 +52,10 @@ const ZLAppPlayerBar = memo(() => {
       .catch(() => {
         setIsPlay(false)
       })
-    setDuration(currentSong.dt)
+    setDuration(currentSong && currentSong.dt)
   }, [currentSong])
 
   // action
-
   // 播放音乐
   const playMusic = () => {
     isPlay ? playRef.current.pause() : playRef.current.play()
@@ -82,25 +88,60 @@ const ZLAppPlayerBar = memo(() => {
     setIsChanging(false)
   }
 
+  // 处理歌曲播放方式
+  const handleSequence = () => {
+    let currentSequence = sequence + 1
+    if (currentSequence > 2) {
+      currentSequence = 0
+    }
+    dispatch(changeSequence(currentSequence))
+  }
+
+  // 点击播放下一首，上一首歌曲
+  const changeMusic = (tag: number) => {
+    dispatch(changeCurrentSongAnIndex(tag))
+  }
+
+  // 当前歌曲播放完毕
+  const timeEnded = () => {
+    // 表示当前模式为单曲循环
+    if (sequence === 2) {
+      playRef.current.currentTime = 0
+      playRef.current.play()
+    } else {
+      // 如果不是单曲循环，则按照点击下一首的逻辑进行播放
+      dispatch(changeCurrentSongAnIndex(1))
+    }
+  }
+
   return (
     <AppPlayerBarWrapper className="sprite_playbar">
       <div className="content wrap-v2">
-        <Control>
-          <button className="sprite_playbar btn prev"></button>
+        <Control $isPlay={isPlay}>
+          <button
+            className="sprite_playbar btn prev"
+            onClick={() => changeMusic(-1)}
+          ></button>
           <button
             className="sprite_playbar btn play"
             onClick={() => playMusic()}
           ></button>
-          <button className="sprite_playbar btn next"></button>
+          <button
+            className="sprite_playbar btn next"
+            onClick={() => changeMusic(1)}
+          ></button>
         </Control>
         <PlayInfo>
           <div className="image">
-            <a href="/todo">
+            <NavLink to="/discover/player">
               <img
-                src={getSizeImage(currentSong.al && currentSong.al.picUrl, 35)}
+                src={getSizeImage(
+                  currentSong && currentSong.al && currentSong.al.picUrl,
+                  35
+                )}
                 alt=""
               />
-            </a>
+            </NavLink>
           </div>
           <div className="info">
             <div className="song">
@@ -108,7 +149,7 @@ const ZLAppPlayerBar = memo(() => {
                 {currentSong && currentSong.name}
               </span>
               <span className="singer-name">
-                {currentSong.ar && currentSong.ar[0].name}
+                {currentSong && currentSong.ar && currentSong.ar[0].name}
               </span>
             </div>
             <div className="process">
@@ -129,19 +170,28 @@ const ZLAppPlayerBar = memo(() => {
             </div>
           </div>
         </PlayInfo>
-        <Operator>
+        <Operator $sequence={sequence}>
           <div className="left">
             <button className="sprite_playbar btn favor"></button>
             <button className="sprite_playbar btn share"></button>
           </div>
           <div className="right sprite_playbar">
             <button className="sprite_playbar btn volume"></button>
-            <button className="sprite_playbar btn loop"></button>
-            <button className="sprite_playbar btn playlist"></button>
+            <button
+              className="sprite_playbar btn loop"
+              onClick={() => handleSequence()}
+            ></button>
+            <button className="sprite_playbar btn playlist">
+              {playList.length}
+            </button>
           </div>
         </Operator>
       </div>
-      <audio ref={playRef} onTimeUpdate={timeUpdate}></audio>
+      <audio
+        ref={playRef}
+        onTimeUpdate={timeUpdate}
+        onEnded={timeEnded}
+      ></audio>
     </AppPlayerBarWrapper>
   )
 })

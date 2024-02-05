@@ -32,22 +32,22 @@ export const recommendSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getTopBanner.fulfilled, (state, action) => {
-        state.topBannerList = action.payload.data.banners
+        state.topBannerList = action.payload && action.payload.data.banners
       })
       .addCase(getHotRecommend.fulfilled, (state, action) => {
-        state.hotRecommendList = action.payload.data.result
+        state.hotRecommendList = action.payload && action.payload.data.result
       })
       .addCase(getNewAlbum.fulfilled, (state, action) => {
-        state.newAlbumList = action.payload.data.albums
+        state.newAlbumList = action.payload && action.payload.data.albums
       })
       .addCase(getUpRanking.fulfilled, (state, action) => {
-        state.upRanking = action.payload.data.playlist
+        state.upRanking = action.payload && action.payload.data.playlist
       })
       .addCase(getNewRanking.fulfilled, (state, action) => {
-        state.newRanking = action.payload.data.playlist
+        state.newRanking = action.payload && action.payload.data.playlist
       })
       .addCase(getOriginRanking.fulfilled, (state, action) => {
-        state.originRanking = action.payload.data.playlist
+        state.originRanking = action.payload && action.payload.data.playlist
       })
   }
 })
