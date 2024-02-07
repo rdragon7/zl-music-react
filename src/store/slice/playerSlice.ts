@@ -1,19 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getSongDetail } from '@/api/player'
+import { getSongDetail, getSongLyric } from '@/api/player'
+import { parseLyric } from '@/utils/parse-lyric'
 
 export interface IState {
   currentSong: any
   currentSongIndex: number
   playList: []
   sequence: number
+  lyricList: Array<any>
+  currentLyricIndex: number
 }
 
 const initialState: IState = {
   currentSong: {},
   currentSongIndex: 0,
   playList: [],
-  sequence: 0 // 0 => 顺序播放 1=> 随机播放 2 => 单曲循环
+  sequence: 0, // 0 => 顺序播放 1=> 随机播放 2 => 单曲循环
+  lyricList: [],
+  currentLyricIndex: 0
 }
 
 export const playerSlice = createSlice({
@@ -31,7 +36,15 @@ export const playerSlice = createSlice({
     },
     changeSequence(state, action) {
       state.sequence = action.payload
+    },
+    changeCurrentLyricIndex(state, action) {
+      state.currentLyricIndex = action.payload
     }
+  },
+  extraReducers: builder => {
+    builder.addCase(getSongLyricList.fulfilled, (state, action) => {
+      state.lyricList = action.payload
+    })
   }
   /* extraReducers: builder => {
     builder.addCase(getSongDetailList.fulfilled, (state, action) => {
@@ -57,6 +70,7 @@ export const getSongDetailList = createAsyncThunk(
       dispatch(changeCurrentSongIndex(songIndex))
       const song = playList[songIndex]
       dispatch(changeCurrentSong(song))
+      dispatch(getSongLyricList(song.id))
     } else {
       // 没有找到歌曲
       const data = await getSongDetail(ids)
@@ -66,6 +80,7 @@ export const getSongDetailList = createAsyncThunk(
       dispatch(changePlayList(newPlayList))
       dispatch(changeCurrentSongIndex(newPlayList.length - 1))
       dispatch(changeCurrentSong(res))
+      dispatch(getSongLyricList(res.id))
       return res
     }
   }
@@ -107,11 +122,23 @@ export const changeCurrentSongAnIndex = (tag: number) => {
   }
 }
 
+// 获取歌曲歌词
+export const getSongLyricList = createAsyncThunk(
+  'player/constLyric',
+  async (id: number) => {
+    const data = await getSongLyric(id)
+    const res = data.data.lrc.lyric
+    const lyricList = parseLyric(res)
+    return lyricList
+  }
+)
+
 export const {
   changePlayList,
   changeCurrentSongIndex,
   changeCurrentSong,
-  changeSequence
+  changeSequence,
+  changeCurrentLyricIndex
 } = playerSlice.actions
 
 export default playerSlice.reducer

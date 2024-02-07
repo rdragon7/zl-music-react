@@ -9,3 +9,13 @@ export function getSongDetail(ids: number) {
     }
   })
 }
+
+// 获取当前歌曲歌词
+export function getSongLyric(id: number) {
+  return zlRequest.get({
+    url: '/lyric',
+    params: {
+      id
+    }
+  })
+}

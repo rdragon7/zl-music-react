@@ -2,11 +2,13 @@ import { memo, useEffect, useRef, useState } from 'react'
 
 import { NavLink } from 'react-router-dom'
 import { Slider } from 'antd'
+import ZLPlayerMessage from '../player-message'
 import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
 import {
   changeSequence,
   getSongDetailList,
-  changeCurrentSongAnIndex
+  changeCurrentSongAnIndex,
+  changeCurrentLyricIndex
 } from '@/store/slice/playerSlice'
 import {
   formatMinuteSecond,
@@ -28,12 +30,13 @@ const ZLAppPlayerBar = memo(() => {
   const [isPlay, setIsPlay] = useState(false)
   // 控制是否正在改变进度
   const [isChanging, setIsChanging] = useState(false)
+  // 保存歌词
+  const [lyricContent, setLyricContent] = useState('')
 
   // redux hooks
   const dispatch = useAppDispatch()
-  const { currentSong, sequence, playList } = useAppSelector(
-    (state: RootState) => state.player
-  )
+  const { currentSong, sequence, playList, lyricList, currentLyricIndex } =
+    useAppSelector((state: RootState) => state.player)
 
   // other hooks
   const playRef = useRef<any>()
@@ -70,6 +73,21 @@ const ZLAppPlayerBar = memo(() => {
       setCurrentTime(currentTime * 1000)
       // 根据当前歌曲播放时间设置进度条的值
       setProgress(((currentTime * 1000) / duration) * 100)
+    }
+
+    // 获取当前时间对应的歌词
+    let i = 0
+    for (; i < lyricList.length; i++) {
+      const lyricItem = lyricList[i]
+      if (currentTime * 1000 < lyricItem.time) {
+        break
+      }
+    }
+    const finalIndex = i - 1
+    if (currentLyricIndex !== finalIndex) {
+      dispatch(changeCurrentLyricIndex(finalIndex))
+      const content = lyricList[finalIndex] && lyricList[finalIndex].content
+      setLyricContent(content)
     }
   }
 
@@ -192,6 +210,8 @@ const ZLAppPlayerBar = memo(() => {
         onTimeUpdate={timeUpdate}
         onEnded={timeEnded}
       ></audio>
+
+      {lyricContent ? <ZLPlayerMessage info={lyricContent} /> : ''}
     </AppPlayerBarWrapper>
   )
 })
