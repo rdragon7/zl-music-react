@@ -3,6 +3,7 @@ import { memo, useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Slider } from 'antd'
 import ZLPlayerMessage from '../player-message'
+import ZLPlayerVolume from '../player-volume'
 import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
 import {
   changeSequence,
@@ -32,6 +33,10 @@ const ZLAppPlayerBar = memo(() => {
   const [isChanging, setIsChanging] = useState(false)
   // 保存歌词
   const [lyricContent, setLyricContent] = useState('')
+  // 控制音量进度条是否显示
+  const [showVolume, setShowVolume] = useState(false)
+  // 控制音量
+  const [volume, setVolume] = useState(0.5)
 
   // redux hooks
   const dispatch = useAppDispatch()
@@ -63,6 +68,7 @@ const ZLAppPlayerBar = memo(() => {
   const playMusic = () => {
     isPlay ? playRef.current.pause() : playRef.current.play()
     setIsPlay(!isPlay)
+    playRef.current.volume = volume
   }
 
   // 当歌曲时间改变触发
@@ -89,6 +95,8 @@ const ZLAppPlayerBar = memo(() => {
       const content = lyricList[finalIndex] && lyricList[finalIndex].content
       setLyricContent(content)
     }
+    // 控制音量
+    playRef.current.volume = volume
   }
 
   // slider值改变时触发
@@ -130,6 +138,11 @@ const ZLAppPlayerBar = memo(() => {
       // 如果不是单曲循环，则按照点击下一首的逻辑进行播放
       dispatch(changeCurrentSongAnIndex(1))
     }
+  }
+
+  // 改变音量
+  const volumeClick = (value: number) => {
+    setVolume(value)
   }
 
   return (
@@ -194,7 +207,17 @@ const ZLAppPlayerBar = memo(() => {
             <button className="sprite_playbar btn share"></button>
           </div>
           <div className="right sprite_playbar">
-            <button className="sprite_playbar btn volume"></button>
+            <button
+              className="sprite_playbar btn volume"
+              onClick={() => setShowVolume(!showVolume)}
+            >
+              {showVolume && (
+                <ZLPlayerVolume
+                  volumeClick={(value: number) => volumeClick(value)}
+                  volume={volume}
+                />
+              )}
+            </button>
             <button
               className="sprite_playbar btn loop"
               onClick={() => handleSequence()}

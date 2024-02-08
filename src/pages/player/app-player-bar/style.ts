@@ -159,6 +159,7 @@ export const Operator = styled.div<{ $sequence: number }>`
     margin-top: 3px;
     background-position: -147px -248px;
     .volume {
+      position: relative;
       background-position: -2px -248px;
       &:hover {
         cursor: pointer;
