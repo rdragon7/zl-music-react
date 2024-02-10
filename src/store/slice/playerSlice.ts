@@ -1,6 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { getSongDetail, getSongLyric } from '@/api/player'
+import {
+  getSimiPlaylist,
+  getSimiSong,
+  getSongComment,
+  getSongDetail,
+  getSongLyric
+} from '@/api/player'
 import { parseLyric } from '@/utils/parse-lyric'
 
 export interface IState {
@@ -10,6 +16,9 @@ export interface IState {
   sequence: number
   lyricList: Array<any>
   currentLyricIndex: number
+  songCommentList: any
+  simiPlayList: []
+  simiSongList: []
 }
 
 const initialState: IState = {
@@ -18,7 +27,10 @@ const initialState: IState = {
   playList: [],
   sequence: 0, // 0 => 顺序播放 1=> 随机播放 2 => 单曲循环
   lyricList: [],
-  currentLyricIndex: 0
+  currentLyricIndex: 0,
+  songCommentList: {},
+  simiPlayList: [],
+  simiSongList: []
 }
 
 export const playerSlice = createSlice({
@@ -42,9 +54,19 @@ export const playerSlice = createSlice({
     }
   },
   extraReducers: builder => {
-    builder.addCase(getSongLyricList.fulfilled, (state, action) => {
-      state.lyricList = action.payload
-    })
+    builder
+      .addCase(getSongLyricList.fulfilled, (state, action) => {
+        state.lyricList = action.payload
+      })
+      .addCase(getSongCommentList.fulfilled, (state, action) => {
+        state.songCommentList = action.payload
+      })
+      .addCase(getSimiPlayList.fulfilled, (state, action) => {
+        state.simiPlayList = action.payload
+      })
+      .addCase(getSimiSongList.fulfilled, (state, action) => {
+        state.simiSongList = action.payload
+      })
   }
   /* extraReducers: builder => {
     builder.addCase(getSongDetailList.fulfilled, (state, action) => {
@@ -130,6 +152,37 @@ export const getSongLyricList = createAsyncThunk(
     const res = data.data.lrc.lyric
     const lyricList = parseLyric(res)
     return lyricList
+  }
+)
+
+// 获取歌曲评论
+export const getSongCommentList = createAsyncThunk(
+  'player/comment',
+  async (id: number) => {
+    const data = await getSongComment(id)
+    const res = data.data
+    return res
+  }
+)
+
+// 获取包含当前歌曲的歌单
+export const getSimiPlayList = createAsyncThunk(
+  'player/simiPLay',
+  async (id: number) => {
+    const data = await getSimiPlaylist(id)
+    const res = data.data.playlists
+    return res
+  }
+)
+
+// 获取包含当前歌曲的相似歌单
+export const getSimiSongList = createAsyncThunk(
+  'player/simiSong',
+  async (id: number) => {
+    const data = await getSimiSong(id)
+    const res = data.data.songs
+
+    return res
   }
 )
 
