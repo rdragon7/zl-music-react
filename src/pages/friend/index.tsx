@@ -1,7 +1,13 @@
 import { memo } from 'react'
 
+import { FriendWrapper } from './style'
+
 const ZLFriend = memo(() => {
-  return <div>ZLFriend</div>
+  return (
+    <FriendWrapper className="wrap-v1">
+      <div className="img"></div>
+    </FriendWrapper>
+  )
 })
 
 export default ZLFriend
