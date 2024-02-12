@@ -18,4 +18,7 @@ export const PlayerCommentWrapper = styled.div`
     }
     margin-bottom: 20px;
   }
+  .divider {
+    border-bottom: 1px dotted #ccc;
+  }
 `

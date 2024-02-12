@@ -19,6 +19,7 @@ export interface IState {
   songCommentList: any
   simiPlayList: []
   simiSongList: []
+  currentPage: number
 }
 
 const initialState: IState = {
@@ -30,7 +31,8 @@ const initialState: IState = {
   currentLyricIndex: 0,
   songCommentList: {},
   simiPlayList: [],
-  simiSongList: []
+  simiSongList: [],
+  currentPage: 1
 }
 
 export const playerSlice = createSlice({
@@ -51,15 +53,18 @@ export const playerSlice = createSlice({
     },
     changeCurrentLyricIndex(state, action) {
       state.currentLyricIndex = action.payload
+    },
+    changeSongCommentAction(state, action) {
+      state.songCommentList = action.payload
+    },
+    changeCurrentPage(state, action) {
+      state.currentPage = action.payload
     }
   },
   extraReducers: builder => {
     builder
       .addCase(getSongLyricList.fulfilled, (state, action) => {
         state.lyricList = action.payload
-      })
-      .addCase(getSongCommentList.fulfilled, (state, action) => {
-        state.songCommentList = action.payload
       })
       .addCase(getSimiPlayList.fulfilled, (state, action) => {
         state.simiPlayList = action.payload
@@ -68,11 +73,6 @@ export const playerSlice = createSlice({
         state.simiSongList = action.payload
       })
   }
-  /* extraReducers: builder => {
-    builder.addCase(getSongDetailList.fulfilled, (state, action) => {
-      state.currentSong = action.payload && action.payload.data.songs[0]
-    })
-  } */
 })
 
 // 获取歌曲详情
@@ -156,14 +156,18 @@ export const getSongLyricList = createAsyncThunk(
 )
 
 // 获取歌曲评论
-export const getSongCommentList = createAsyncThunk(
-  'player/comment',
-  async (id: number) => {
-    const data = await getSongComment(id)
-    const res = data.data
-    return res
+export const getSongCommentList = (
+  id: number,
+  limit: number,
+  offset: number
+) => {
+  return (dispatch: any) => {
+    getSongComment(id, limit, offset).then(res => {
+      const data = res.data
+      dispatch(changeSongCommentAction(data))
+    })
   }
-)
+}
 
 // 获取包含当前歌曲的歌单
 export const getSimiPlayList = createAsyncThunk(
@@ -191,7 +195,9 @@ export const {
   changeCurrentSongIndex,
   changeCurrentSong,
   changeSequence,
-  changeCurrentLyricIndex
+  changeCurrentLyricIndex,
+  changeSongCommentAction,
+  changeCurrentPage
 } = playerSlice.actions
 
 export default playerSlice.reducer
