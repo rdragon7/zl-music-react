@@ -67,6 +67,7 @@ const ZLAppPlayerBar = memo(() => {
   // 播放音乐
   const playMusic = () => {
     isPlay ? playRef.current.pause() : playRef.current.play()
+    // setIsPlay(!isPlay)
     setIsPlay(!isPlay)
     playRef.current.volume = volume
   }

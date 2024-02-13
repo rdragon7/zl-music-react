@@ -33,8 +33,6 @@ const ZLPlayerComment = memo(() => {
 
   // action
   const handlePagination = (limit: number, offset: number) => {
-    console.log(limit, offset)
-
     dispatch(getSongCommentList(currentId, limit, offset))
   }
 

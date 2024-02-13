@@ -26,7 +26,7 @@ const ZLTopRanking: React.FC<IProps> = memo(props => {
       <div className="ranking-header">
         <div className="image">
           <img src={getSizeImage(info.coverImgUrl, 80)} alt="" />
-          <a href="/todo" className="image_cover">
+          <a href="/discover/ranking" className="image_cover">
             ranking
           </a>
         </div>

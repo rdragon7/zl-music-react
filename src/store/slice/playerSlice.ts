@@ -158,8 +158,8 @@ export const getSongLyricList = createAsyncThunk(
 // 获取歌曲评论
 export const getSongCommentList = (
   id: number,
-  limit: number,
-  offset: number
+  limit?: number,
+  offset?: number
 ) => {
   return (dispatch: any) => {
     getSongComment(id, limit, offset).then(res => {
