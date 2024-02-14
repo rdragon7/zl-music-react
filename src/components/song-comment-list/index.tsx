@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
-import ZLPagination from '../pagination'
 import ZLSongCommentListItem from '@/components/song-comment-list-item'
+import ZLPagination from '../pagination'
 import { IProps } from './typings'
 import { COMMENT_PAGE_SIZE } from '@/common/constants'
 

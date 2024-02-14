@@ -52,7 +52,7 @@ const ZLPlayerComment = memo(() => {
               <h3 className="title">精彩评论</h3>
             </div>
             <ZLSongCommentList
-              info={songCommentList.hotComments}
+              info={songCommentList && songCommentList.hotComments}
               isShowPagination={false}
               handleCurrentPage={page => handleCurrentPage(page)}
               handlePagination={(limit, offset) =>
@@ -75,8 +75,8 @@ const ZLPlayerComment = memo(() => {
         )}
         <ZLSongCommentList
           isShowPagination={true}
-          info={songCommentList.comments}
-          total={songCommentList.total}
+          info={songCommentList && songCommentList.comments}
+          total={songCommentList && songCommentList.total}
           currentPage={currentPage}
           handleCurrentPage={page => handleCurrentPage(page)}
           handlePagination={(limit, offset) => handlePagination(limit, offset)}

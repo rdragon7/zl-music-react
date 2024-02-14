@@ -12,10 +12,7 @@ const ZLSongCover: React.FC<IProps> = memo(props => {
   return (
     <SongCoverWrapper right={right}>
       <div className="cover-top">
-        <img
-          src={getSizeImage(info.picUrl || info.coverImageUrl, 140)}
-          alt=""
-        />
+        <img src={getSizeImage(info.picUrl || info.coverImgUrl, 140)} alt="" />
         <a href="/todo" className="cover sprite_cover">
           <div className="info sprite_cover">
             <span>

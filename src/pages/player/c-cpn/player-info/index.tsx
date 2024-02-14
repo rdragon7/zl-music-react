@@ -1,9 +1,9 @@
 import { memo, useEffect, useState } from 'react'
 
+import ZLSongOperationBar from '@/components/song-operation-bar'
 import { getSizeImage } from '@/utils/format-data'
 import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
 import { getSongCommentList } from '@/store/slice/playerSlice'
-import ZLSongOperationBar from '@/components/song-operation-bar'
 
 import { InfoLeft, InfoRight, PlayerInfoWrapper } from './style'
 
