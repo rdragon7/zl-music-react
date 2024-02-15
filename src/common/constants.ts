@@ -4,3 +4,5 @@ export const HOT_RECOMMEND_LIMIT = 8
 export const COMMENT_PAGE_SIZE = 20
 // 根据分类显示歌单煤业显示条数
 export const SONG_PAGE_SIZE = 35
+// 电台每页显示条数
+export const RADIO_PAGE_SIZE = 30
