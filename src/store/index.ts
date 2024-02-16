@@ -5,6 +5,8 @@ import playerSlice from './slice/playerSlice'
 import rankingSlice from './slice/rankingSlice'
 import songSlice from './slice/songSlice'
 import radioSlice from './slice/radioSlice'
+import artistSlice from './slice/artistSlice'
+import albumSlice from './slice/albumSlice'
 
 const store = configureStore({
   reducer: {
@@ -12,7 +14,9 @@ const store = configureStore({
     player: playerSlice,
     ranking: rankingSlice,
     songs: songSlice,
-    radio: radioSlice
+    radio: radioSlice,
+    artist: artistSlice,
+    album: albumSlice
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

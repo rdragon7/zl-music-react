@@ -1,6 +1,6 @@
 export interface IProps {
   title: string
-  keyword?: []
+  keyword?: any[]
   rightSlot?: string[]
   itemClick?: (item: any) => void
 }

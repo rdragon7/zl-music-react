@@ -19,12 +19,13 @@ export const ThemeHeaderNormalWrapper = styled.div`
       font-size: 14px;
       .album-item {
         .keyword {
+          color: #666;
           &:hover {
             text-decoration: underline;
           }
         }
         .album-divider {
-          margin: 0 15px;
+          margin: 0 12px;
           color: #ccc;
         }
         &:last-of-type .album-divider {

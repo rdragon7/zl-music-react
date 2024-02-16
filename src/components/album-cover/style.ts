@@ -7,6 +7,7 @@ export const AlbumCoverWrapper = styled.div<{
 }>`
   width: ${props => props.width + 'px'};
   margin-top: 15px;
+  /* margin-right: 20px; */
   .album-image {
     position: relative;
     width: ${props => props.width + 'px'};

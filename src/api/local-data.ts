@@ -78,7 +78,7 @@ export const hotAncHor = [
   }
 ]
 
-// 歌手类别
+// 歌手页面歌手类别
 export const artistCategories = [
   {
     title: '华语',

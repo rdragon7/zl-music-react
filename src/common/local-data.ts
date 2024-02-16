@@ -119,3 +119,27 @@ export const discoverMenu = [
     link: '/discover/album'
   }
 ]
+
+// 新碟上架中的关键字
+export const albumKeyword = [
+  {
+    title: '全部',
+    area: 'all'
+  },
+  {
+    title: '华语',
+    area: 'zh'
+  },
+  {
+    title: '欧美',
+    area: 'ea'
+  },
+  {
+    title: '韩国',
+    area: 'kr'
+  },
+  {
+    title: '日本',
+    area: 'jp'
+  }
+]
