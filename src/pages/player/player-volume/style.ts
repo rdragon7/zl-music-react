@@ -10,6 +10,7 @@ export const PlayerVolumeWrapper = styled.div`
   width: 32px;
   height: 113px;
   background-position: 0 -503px;
+  z-index: 9999;
   /* 重置antd中进度条样式 */
   .ant-slider-vertical {
     width: 12px;

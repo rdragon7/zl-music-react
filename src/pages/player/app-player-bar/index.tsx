@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Slider } from 'antd'
 import ZLPlayerMessage from '../player-message'
 import ZLPlayerVolume from '../player-volume'
+import ZLPlayerPanel from '../player-panel'
 import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
 import {
   changeSequence,
@@ -37,6 +38,8 @@ const ZLAppPlayerBar = memo(() => {
   const [showVolume, setShowVolume] = useState(false)
   // 控制音量
   const [volume, setVolume] = useState(0.5)
+  // 控制歌曲列表是否显示
+  const [showPanel, setShowPanel] = useState(false)
 
   // redux hooks
   const dispatch = useAppDispatch()
@@ -223,7 +226,10 @@ const ZLAppPlayerBar = memo(() => {
               className="sprite_playbar btn loop"
               onClick={() => handleSequence()}
             ></button>
-            <button className="sprite_playbar btn playlist">
+            <button
+              className="sprite_playbar btn playlist"
+              onClick={() => setShowPanel(!showPanel)}
+            >
               {playList.length}
             </button>
           </div>
@@ -236,6 +242,7 @@ const ZLAppPlayerBar = memo(() => {
       ></audio>
 
       {lyricContent ? <ZLPlayerMessage info={lyricContent} /> : ''}
+      {showPanel && <ZLPlayerPanel />}
     </AppPlayerBarWrapper>
   )
 })

@@ -1,6 +1,7 @@
-import { memo } from 'react'
-import { NavLink } from 'react-router-dom'
+import { memo, useState } from 'react'
 
+import { NavLink } from 'react-router-dom'
+import ZLSearchList from '../search-list'
 import { Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import { headerLinks } from '@/common/local-data'
@@ -9,6 +10,8 @@ import { HeaderWrapper } from './style'
 
 const ZLAppHeader = memo(() => {
   // state & props
+  const [showSearch, setShowSearch] = useState(true)
+  const [currentKeyword, setCurrentKeyword] = useState('')
 
   // redux hooks
 
@@ -31,6 +34,24 @@ const ZLAppHeader = memo(() => {
       )
     }
   }
+
+  // 输入框内容发生改变出发
+  const handleInputChange = (e: any) => {
+    setShowSearch(true)
+    setCurrentKeyword(e.target.value)
+  }
+
+  // input框失去焦点出发
+  const handleInputBlur = () => {
+    setTimeout(() => {
+      setShowSearch(false)
+    }, 300)
+  }
+  // input框获取焦点出发
+  const handleInputFocus = () => {
+    setShowSearch(true)
+  }
+
   return (
     <HeaderWrapper>
       <div className="header-content wrap-v1">
@@ -53,9 +74,13 @@ const ZLAppHeader = memo(() => {
             className="search"
             placeholder="音乐/视频/电台/用户"
             prefix={<SearchOutlined />}
+            onBlur={() => handleInputBlur()}
+            onFocus={() => handleInputFocus()}
+            onChange={e => handleInputChange(e)}
           />
           <div className="center">创作者中心</div>
           <div className="login">登录</div>
+          {showSearch ? <ZLSearchList currentKeyword={currentKeyword} /> : ''}
         </div>
       </div>
       <div className="header-divider"></div>

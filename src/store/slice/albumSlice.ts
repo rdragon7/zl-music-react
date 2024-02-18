@@ -37,10 +37,7 @@ export const albumSlice = createSlice({
 // 获取热门新碟
 export const getHotAlbumList = createAsyncThunk('album/hotAlbum', async () => {
   const data = await getHotAlbum()
-
   const res = data.data.albums
-  console.log(res)
-
   return res
 })
 
