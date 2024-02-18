@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 
+import { NavLink } from 'react-router-dom'
 import { IProps } from './typings'
 
 import { ThemeHeaderRCMWrapper } from './style'
@@ -17,7 +18,7 @@ const ZLThemeHeaderRCM: React.FC<IProps> = memo(props => {
             keyword.map((item: string) => {
               return (
                 <div className="item" key={item}>
-                  <a href="/todo">{item}</a>
+                  <NavLink to="/todo">{item}</NavLink>
                   <span className="divider">|</span>
                 </div>
               )
@@ -25,7 +26,7 @@ const ZLThemeHeaderRCM: React.FC<IProps> = memo(props => {
         </div>
       </div>
       <div className="theme-header-right">
-        <a href="/todo">更多</a>
+        <NavLink to="/todo">更多</NavLink>
         <i className="icon sprite_02"></i>
       </div>
     </ThemeHeaderRCMWrapper>

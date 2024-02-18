@@ -32,6 +32,7 @@ const ZLHotAlbum = memo(() => {
                 width={153}
                 size={130}
                 bgp={-845}
+                ftSize={130}
               />
             )
           })}

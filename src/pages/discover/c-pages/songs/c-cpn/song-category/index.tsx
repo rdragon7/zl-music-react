@@ -14,10 +14,10 @@ const ZLSongsCategory = memo(() => {
   // state & props
 
   // redux hooks
+  const dispatch = useAppDispatch()
   const { category } = useAppSelector((state: RootState) => state.songs)
 
   // other hooks
-  const dispatch = useAppDispatch()
 
   // action
   // 处理全部分类按钮

@@ -21,6 +21,7 @@ export const ThemeHeaderNormalWrapper = styled.div`
         .keyword {
           color: #666;
           &:hover {
+            cursor: pointer;
             text-decoration: underline;
           }
         }

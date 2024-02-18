@@ -5,7 +5,11 @@ import ZLAlbumCover from '@/components/album-cover'
 import ZLPagination from '@/components/pagination'
 import { albumKeyword } from '@/common/local-data'
 import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
-import { changeCurrentPage, getAllAlbumList } from '@/store/slice/albumSlice'
+import {
+  changeCurrentArea,
+  changeCurrentPage,
+  getAllAlbumList
+} from '@/store/slice/albumSlice'
 import { ALBUM_PAGE_SIZE } from '@/common/constants'
 
 import { AllAlbumWrapper } from './style'
@@ -27,11 +31,12 @@ const ZLAllAlbum = memo(() => {
   // action
   // 处理关键字
   const itemClick = (area: any) => {
-    console.log(area)
+    dispatch(changeCurrentPage(1))
+    dispatch(changeCurrentArea(area))
   }
   // 处理分页
   const onPageChange = (page: number, pageSize: number) => {
-    dispatch(changeCurrentPage(1))
+    dispatch(changeCurrentPage(page))
     dispatch(
       getAllAlbumList(
         currentArea && currentArea,
@@ -49,7 +54,8 @@ const ZLAllAlbum = memo(() => {
         itemClick={item => itemClick(item)}
       />
       <div className="all-list">
-        {allAlbum.albums &&
+        {allAlbum &&
+          allAlbum.albums &&
           allAlbum.albums.map((item: any) => {
             return (
               <ZLAlbumCover
@@ -61,13 +67,13 @@ const ZLAllAlbum = memo(() => {
               />
             )
           })}
-        <ZLPagination
-          currentPage={currentPage}
-          total={allAlbum.total}
-          pageSize={ALBUM_PAGE_SIZE}
-          onPageChange={(page, pageSize) => onPageChange(page, pageSize)}
-        />
       </div>
+      <ZLPagination
+        currentPage={currentPage}
+        total={allAlbum.total}
+        pageSize={ALBUM_PAGE_SIZE}
+        onPageChange={(page, pageSize) => onPageChange(page, pageSize)}
+      />
     </AllAlbumWrapper>
   )
 })

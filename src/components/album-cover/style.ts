@@ -4,6 +4,7 @@ export const AlbumCoverWrapper = styled.div<{
   width: number
   size: number
   $bgp: number
+  $ftSize: number
 }>`
   width: ${props => props.width + 'px'};
   margin-top: 15px;
@@ -30,13 +31,22 @@ export const AlbumCoverWrapper = styled.div<{
   }
   .album-info {
     font-size: 12px;
-    width: ${props => props.size + 'px'};
+    line-height: 18px;
+    width: ${props => props.$ftSize + 'px'};
     padding-top: 8px;
     .name {
       color: #000;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
     .artist {
       color: #666;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
     }
   }
 `

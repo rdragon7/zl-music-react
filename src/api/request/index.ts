@@ -61,11 +61,11 @@ class ZLRequest {
   }
 
   put(config: AxiosRequestConfig) {
-    return this.request({ ...config, method: 'PUT' })
+    return this.instance.request({ ...config, method: 'PUT' })
   }
 
   delete(config: AxiosRequestConfig) {
-    return this.request({ ...config, method: 'DELETE' })
+    return this.instance.request({ ...config, method: 'DELETE' })
   }
 }
 

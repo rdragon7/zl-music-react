@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useLayoutEffect } from 'react'
 
 import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
 import {
@@ -25,9 +25,9 @@ const ZLTopList = memo(() => {
     dispatch(getRankingTopList())
   }, [dispatch])
 
-  useEffect(() => {
-    const id = topList[currentIndex] && (topList[currentIndex] as any).id
-    if (!id) return
+  useLayoutEffect(() => {
+    const id =
+      topList && topList[currentIndex] && (topList[currentIndex] as any).id
     // 根据id获取榜单详情
     dispatch(getRankingPlayList(id))
     // 根据id获取榜单评论

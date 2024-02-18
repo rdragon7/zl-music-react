@@ -32,10 +32,7 @@ const ZLRadioRanking = memo(() => {
 
   return (
     <RadioRankingWrapper>
-      <ZLThemeHeaderNormal
-        title="电台排行榜"
-        rightSlot={['最热电台', '上升最快']}
-      />
+      <ZLThemeHeaderNormal title="电台排行榜" rightSlot={['最热电台']} />
       <div className="ranking-list">
         {hotRadio &&
           hotRadio.djRadios &&

@@ -25,6 +25,9 @@ export const albumSlice = createSlice({
     },
     changeCurrentPage(state, action) {
       state.currentPage = action.payload
+    },
+    changeCurrentArea(state, action) {
+      state.currentArea = action.payload
     }
   },
   extraReducers: builder => {
@@ -51,6 +54,7 @@ export const getAllAlbumList = (area: any, limit: number, offset: number) => {
   }
 }
 
-export const { changeAllAlbum, changeCurrentPage } = albumSlice.actions
+export const { changeAllAlbum, changeCurrentPage, changeCurrentArea } =
+  albumSlice.actions
 
 export default albumSlice.reducer

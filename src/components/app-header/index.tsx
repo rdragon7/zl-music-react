@@ -2,18 +2,24 @@ import { memo, useState } from 'react'
 
 import { NavLink } from 'react-router-dom'
 import ZLSearchList from '../search-list'
+import ZLLoginBox from '../login-box'
 import { Input } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import { headerLinks } from '@/common/local-data'
 
 import { HeaderWrapper } from './style'
+import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
+import { changeIsShowLogin } from '@/store/slice/loginSlice'
 
 const ZLAppHeader = memo(() => {
   // state & props
-  const [showSearch, setShowSearch] = useState(true)
+  const [showSearch, setShowSearch] = useState(false)
   const [currentKeyword, setCurrentKeyword] = useState('')
+  // const [showLogin, setShowLogin] = useState(false)
 
   // redux hooks
+  const dispatch = useAppDispatch()
+  const { isShowLogin } = useAppSelector((state: RootState) => state.login)
 
   // other hooks
 
@@ -52,6 +58,11 @@ const ZLAppHeader = memo(() => {
     setShowSearch(true)
   }
 
+  // 点击登录按钮显示登录框
+  const showLoginBox = () => {
+    dispatch(changeIsShowLogin(!isShowLogin))
+  }
+
   return (
     <HeaderWrapper>
       <div className="header-content wrap-v1">
@@ -79,11 +90,14 @@ const ZLAppHeader = memo(() => {
             onChange={e => handleInputChange(e)}
           />
           <div className="center">创作者中心</div>
-          <div className="login">登录</div>
+          <div className="login" onClick={() => showLoginBox()}>
+            登录
+          </div>
           {showSearch ? <ZLSearchList currentKeyword={currentKeyword} /> : ''}
         </div>
       </div>
       <div className="header-divider"></div>
+      {isShowLogin ? <ZLLoginBox /> : ''}
     </HeaderWrapper>
   )
 })

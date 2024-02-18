@@ -38,8 +38,6 @@ export const getSearchSong = createAsyncThunk(
   async (keywords: string) => {
     const data = await getSearchSuggest(keywords)
     const res = data.data.result.songs
-    console.log(res)
-
     return res
   }
 )

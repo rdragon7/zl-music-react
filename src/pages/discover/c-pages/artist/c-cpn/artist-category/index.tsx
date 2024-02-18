@@ -24,27 +24,28 @@ const ZLArtistCategory = memo(() => {
   }
   return (
     <ArtistCategoryWrapper>
-      {artistCategories.map((item: any) => {
-        return (
-          <div className="section" key={item.area}>
-            <h2 className="title">{item.title}</h2>
-            {item.artists.map((iten: any) => {
-              const isSelect =
-                currentArea === item.area && currentType.type === iten.type
-              return (
-                <CategoryItem
-                  key={iten.name}
-                  className={isSelect ? 'active' : ''}
-                >
-                  <span onClick={() => selectArtist(item.area, iten)}>
-                    {iten.name}
-                  </span>
-                </CategoryItem>
-              )
-            })}
-          </div>
-        )
-      })}
+      {artistCategories &&
+        artistCategories.map((item: any) => {
+          return (
+            <div className="section" key={item.area}>
+              <h2 className="title">{item.title}</h2>
+              {item.artists.map((iten: any) => {
+                const isSelect =
+                  currentArea === item.area && currentType.type === iten.type
+                return (
+                  <CategoryItem
+                    key={iten.name}
+                    className={isSelect ? 'active' : ''}
+                  >
+                    <span onClick={() => selectArtist(item.area, iten)}>
+                      {iten.name}
+                    </span>
+                  </CategoryItem>
+                )
+              })}
+            </div>
+          )
+        })}
     </ArtistCategoryWrapper>
   )
 })

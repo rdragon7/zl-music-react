@@ -16,6 +16,7 @@ export const PlayerListWrapper = styled.div`
     &:hover {
       background-color: #000;
       color: #fff;
+      cursor: pointer;
     }
     &.active {
       color: #fff;

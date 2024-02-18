@@ -1,19 +1,25 @@
 import { memo } from 'react'
 
-import { RootState, useAppSelector } from '@/store/hook'
+import { RootState, useAppDispatch, useAppSelector } from '@/store/hook'
 import { formatMinuteSecond } from '@/utils/format-data'
+import {
+  changeCurrentSongIndex,
+  getSongDetailList
+} from '@/store/slice/playerSlice'
 
 import { PlayerListWrapper } from './style'
 
 const ZLPlayerList = memo(() => {
   // redux hooks
+  const dispatch = useAppDispatch()
   const { playList, currentSongIndex } = useAppSelector(
     (state: RootState) => state.player
   )
 
   // action
-  const handleItem = () => {
-    console.log(11)
+  const handleItem = (index: number, item: any) => {
+    dispatch(changeCurrentSongIndex(index))
+    dispatch(getSongDetailList(item.id))
   }
 
   return (
@@ -26,7 +32,7 @@ const ZLPlayerList = memo(() => {
               className={
                 'play-item ' + (currentSongIndex === index ? 'active' : '')
               }
-              onClick={() => handleItem()}
+              onClick={() => handleItem(index, item)}
             >
               <div className="left">{item.name}</div>
               <div className="right">

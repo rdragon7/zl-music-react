@@ -6,7 +6,6 @@ import ZLRankingList from './c-cpn/ranking-list'
 import ZLRankingComments from './c-cpn/ranking-comments'
 
 import { RankingWrapper, RankingLeft, RankingRight } from './style'
-
 const ZLRanking = memo(() => {
   return (
     <RankingWrapper className="wrap-v2">

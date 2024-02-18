@@ -8,6 +8,7 @@ import radioSlice from './slice/radioSlice'
 import artistSlice from './slice/artistSlice'
 import albumSlice from './slice/albumSlice'
 import searchSlice from './slice/searchSlice'
+import loginSlice from './slice/loginSlice'
 
 const store = configureStore({
   reducer: {
@@ -18,7 +19,8 @@ const store = configureStore({
     radio: radioSlice,
     artist: artistSlice,
     album: albumSlice,
-    search: searchSlice
+    search: searchSlice,
+    login: loginSlice
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -7,10 +7,10 @@ import { AlbumCoverWrapper } from './style'
 
 const ZLAlbumCover: React.FC<IProps> = memo(props => {
   // state & props
-  const { info, width = 153, size = 130, bgp = -845 } = props
+  const { info, width = 153, size = 130, bgp = -845, ftSize = 100 } = props
 
   return (
-    <AlbumCoverWrapper width={width} size={size} $bgp={bgp}>
+    <AlbumCoverWrapper width={width} size={size} $bgp={bgp} $ftSize={ftSize}>
       <div className="album-image">
         <img src={getSizeImage(info.picUrl, size)} alt="" />
         <a href="/todo" className="cover sprite_cover">
