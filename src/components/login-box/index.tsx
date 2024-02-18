@@ -10,7 +10,7 @@ import { changeIsShowLogin } from '@/store/slice/loginSlice'
 const ZLLoginBox = memo(() => {
   // state & props
   const [phone, setPhone] = useState('')
-  const [messageApi] = message.useMessage()
+  const [messageApi, contextHolder] = message.useMessage()
 
   // redux hooks
   const dispatch = useAppDispatch()
@@ -21,8 +21,13 @@ const ZLLoginBox = memo(() => {
   const onFinish = (values: any) => {
     testCode(values.phone, values.code).then(res => {
       if (res.data.code === 200) {
-        messageApi.info('登录成功')
-        dispatch(changeIsShowLogin(false))
+        messageApi.open({
+          type: 'success',
+          content: '登录成功'
+        })
+        setTimeout(() => {
+          dispatch(changeIsShowLogin(false))
+        }, 800)
       }
     })
   }
@@ -36,7 +41,10 @@ const ZLLoginBox = memo(() => {
     if (phone) {
       sendCode(15617162196)
     } else {
-      messageApi.warning('请填写手机号!')
+      messageApi.open({
+        type: 'warning',
+        content: '请填写手机号！'
+      })
     }
   }
 
@@ -50,6 +58,7 @@ const ZLLoginBox = memo(() => {
 
   return (
     <LoginBoxWrapper>
+      {contextHolder}
       <div className="box-header">
         <span>手机号登录</span>
         <i className="close" onClick={() => closeLogin()}></i>
